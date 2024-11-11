@@ -20,7 +20,7 @@ function App() {
     dispatch(asyncPreloadProcess());
   }, [dispatch]);
 
-  const onSignOut = () => {
+  const onLogout = () => {
     dispatch(asyncUnsetAuthUser());
   };
 
@@ -33,7 +33,7 @@ function App() {
   return (
     <div className="app">
       <header>
-        {authUser && !isLoginOrRegisterPage && <Navbar authUser={authUser} onLogout={onSignOut} />}
+        {authUser && !isLoginOrRegisterPage && <Navbar onLogout={onLogout} />}
       </header>
       <main>
         <Routes>
