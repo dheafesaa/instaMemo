@@ -33,9 +33,7 @@ function App() {
   return (
     <div className="app">
       <header>
-        {!isLoginOrRegisterPage && (
-          <Navbar authUser={authUser} onLogout={onSignOut} />
-        )}
+        {authUser && !isLoginOrRegisterPage && <Navbar authUser={authUser} onLogout={onSignOut} />}
       </header>
       <main>
         <Routes>
