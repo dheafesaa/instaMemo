@@ -9,6 +9,9 @@ const baseTheme = createTheme({
       main: '#3D3D3D',
       contrastText: '#FFFFFF',
     },
+    add: {
+      main: '#A5C3FF',
+    },
     background: {
       default: '#FFFFFF',
     },
@@ -35,6 +38,7 @@ const baseTheme = createTheme({
     },
     h5: {
       fontSize: '28px',
+      fontWeight: 'medium',
     },
     h6: {
       fontSize: '20px',

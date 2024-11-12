@@ -6,6 +6,7 @@ import { asyncUnsetAuthUser } from './states/authUser/action';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import Navbar from './components/molecules/Navbar';
+import ActivePage from './pages/ActivePage';
 
 function App() {
   const { authUser = null, isPreload = false } = useSelector(
@@ -39,6 +40,7 @@ function App() {
         <Routes>
           <Route path="/*" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/active" element={<ActivePage />} />
         </Routes>
       </main>
     </div>
