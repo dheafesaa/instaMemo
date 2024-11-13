@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import Navbar from './components/molecules/Navbar';
 import ActivePage from './pages/ActivePage';
+import AddMemoPage from './pages/AddMemoPage';
 
 function App() {
   const { authUser = null, isPreload = false } = useSelector(
@@ -41,6 +42,7 @@ function App() {
           <Route path="/*" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/active" element={<ActivePage />} />
+          <Route path="/add-memo" element={<AddMemoPage />} />
         </Routes>
       </main>
     </div>

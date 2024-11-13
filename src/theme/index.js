@@ -12,6 +12,12 @@ const baseTheme = createTheme({
     add: {
       main: '#A5C3FF',
     },
+    save: {
+      main: '#A5C3FF',
+    },
+    back: {
+      main: '#E8E8E8',
+    },
     background: {
       default: '#FFFFFF',
     },

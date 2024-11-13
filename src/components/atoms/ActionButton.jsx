@@ -14,6 +14,7 @@ function ActionButton({
       startIcon={Icon && <Icon />}
       sx={{
         fontSize,
+        borderRadius: '8px',
       }}
     >
       {label}
