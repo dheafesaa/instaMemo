@@ -13,10 +13,10 @@ function AddMemoPage() {
     <Container maxWidth="lg">
       <Box display="flex" justifyContent="space-between" alignItems="center" mt={4} mb={4}>
         <Typography variant="h5">Create a New Memo</Typography>
-        <Box display="flex" gap={4}>
+        <Box display="flex" gap={3}>
           <ActionButton
             label="Back"
-            onClick={() => navigate('/addmemo')}
+            onClick={() => navigate('/active')}
             color="back"
             variant="contained"
             icon={MdOutlineArrowBackIos}

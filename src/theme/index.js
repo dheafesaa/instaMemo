@@ -18,6 +18,18 @@ const baseTheme = createTheme({
     back: {
       main: '#E8E8E8',
     },
+    archive: {
+      main: '#FFDBA5',
+    },
+    unarchive: {
+      main: '#A5FFAE',
+    },
+    edit: {
+      main: '#A5C3FF',
+    },
+    delete: {
+      main: '#FFA5A5',
+    },
     background: {
       default: '#FFFFFF',
     },
