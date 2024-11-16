@@ -10,6 +10,7 @@ import ActivePage from './pages/ActivePage';
 import AddMemoPage from './pages/AddMemoPage';
 import DetailMemoPage from './pages/DetailMemoPage';
 import ArchievedPage from './pages/ArchievedPage';
+import EditMemoPage from './pages/EditMemoPage';
 
 function App() {
   const { authUser = null, isPreload = false } = useSelector(
@@ -47,6 +48,7 @@ function App() {
           <Route path="/archives" element={<ArchievedPage />} />
           <Route path="/add-memo" element={<AddMemoPage />} />
           <Route path="/detail-memo/:id" element={<DetailMemoPage />} />
+          <Route path="/edit-memo/:id" element={<EditMemoPage />} />
         </Routes>
       </main>
     </div>
