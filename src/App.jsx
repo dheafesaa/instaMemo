@@ -9,6 +9,7 @@ import Navbar from './components/molecules/Navbar';
 import ActivePage from './pages/ActivePage';
 import AddMemoPage from './pages/AddMemoPage';
 import DetailMemoPage from './pages/DetailMemoPage';
+import ArchievedPage from './pages/ArchievedPage';
 
 function App() {
   const { authUser = null, isPreload = false } = useSelector(
@@ -43,6 +44,7 @@ function App() {
           <Route path="/*" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/active" element={<ActivePage />} />
+          <Route path="/archives" element={<ArchievedPage />} />
           <Route path="/add-memo" element={<AddMemoPage />} />
           <Route path="/detail-memo/:id" element={<DetailMemoPage />} />
         </Routes>

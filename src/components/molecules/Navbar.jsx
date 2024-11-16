@@ -24,7 +24,7 @@ function Navbar({ onLogout }) {
 
   const navLinks = [
     { title: 'Active', path: '/active' },
-    { title: 'Archived', path: '/archived' },
+    { title: 'Archived', path: '/archives' },
   ];
 
   return (
