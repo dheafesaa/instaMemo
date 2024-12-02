@@ -1,27 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Box, Container, Typography } from '@mui/material';
 import { FiPlus } from 'react-icons/fi';
 import SearchBar from '../components/atoms/SearchBar';
 import ActionButton from '../components/atoms/ActionButton';
 import MemoList from '../components/organisms/MemoList';
+import { asyncReceiveAllActiveMemo } from '../states/allMemo/action';
 
 function ActivePage() {
   const navigate = useNavigate();
-  const memosData = [
-    {
-      id: '1', title: 'Memo 1', description: 'This is the first memo', createdAt: '2024-11-12',
-    },
-    {
-      id: '2', title: 'Memo 2', description: 'This is the second memo', createdAt: '2024-11-12',
-    },
-    {
-      id: '3', title: 'Memo 3', description: 'This is the third memo', createdAt: '2024-11-12',
-    },
-    {
-      id: '4', title: 'Memo 4', description: 'This is the fourth memo', createdAt: '2024-11-12',
-    },
-  ];
+  const dispatch = useDispatch();
+
+  const activeMemos = useSelector((state) => state.getAllMemo?.activeMemos);
+
+  useEffect(() => {
+    dispatch(asyncReceiveAllActiveMemo());
+  }, [dispatch]);
 
   return (
     <Container maxWidth="lg">
@@ -36,7 +31,7 @@ function ActivePage() {
         />
       </Box>
       <SearchBar placeholder="Search by title..." />
-      <MemoList memos={memosData} />
+      <MemoList memos={activeMemos} />
     </Container>
   );
 }

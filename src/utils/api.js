@@ -90,12 +90,42 @@ const api = (() => {
     return data;
   }
 
+  async function getAllActiveMemo() {
+    const response = await _fetchWithAuth(`${BASE_URL}/memo/active-memo`);
+
+    const responseJson = await response.json();
+
+    const { status, message, data } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    return data;
+  }
+
+  async function getAllArchivedMemo() {
+    const response = await _fetchWithAuth(`${BASE_URL}/memo/archived-memo`);
+
+    const responseJson = await response.json();
+
+    const { status, message, data } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    return data;
+  }
+
   return {
     putAccessToken,
     getAccessToken,
     register,
     login,
     getOwnProfile,
+    getAllActiveMemo,
+    getAllArchivedMemo,
   };
 })();
 
