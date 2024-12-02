@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
 
 function MemoCard({
-  color, children,
+  color,
+  children = null,
 }) {
   return (
     <Box
@@ -25,10 +26,6 @@ function MemoCard({
 MemoCard.propTypes = {
   color: PropTypes.string.isRequired,
   children: PropTypes.node,
-};
-
-MemoCard.defaultProps = {
-  children: null,
 };
 
 export default MemoCard;

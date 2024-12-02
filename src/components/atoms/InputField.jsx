@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import { TextField } from '@mui/material';
 
 function InputField({
-  label,
-  placeholder,
-  value,
+  label = '',
+  placeholder = '',
+  value = '',
   onChange,
-  fullWidth,
-  variant,
-  type,
-  multiline,
-  rows,
+  fullWidth = true,
+  variant = 'outlined',
+  type = 'text',
+  multiline = false,
+  rows = 1,
   ...rest
 }) {
   return (
@@ -45,17 +45,6 @@ InputField.propTypes = {
   type: PropTypes.string,
   multiline: PropTypes.bool,
   rows: PropTypes.number,
-};
-
-InputField.defaultProps = {
-  label: '',
-  placeholder: '',
-  value: '',
-  fullWidth: true,
-  variant: 'outlined',
-  type: 'text',
-  multiline: false,
-  rows: 1,
 };
 
 export default InputField;

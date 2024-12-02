@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import {
+  Routes, Route, useLocation, useNavigate,
+} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { asyncPreloadProcess } from './states/isPreload/action';
 import { asyncUnsetAuthUser } from './states/authUser/action';
@@ -20,6 +22,7 @@ function App() {
   const location = useLocation();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(asyncPreloadProcess());
@@ -27,6 +30,7 @@ function App() {
 
   const onLogout = () => {
     dispatch(asyncUnsetAuthUser());
+    navigate('/');
   };
 
   if (isPreload) {

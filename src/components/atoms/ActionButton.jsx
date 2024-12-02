@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 import { Button } from '@mui/material';
 
 function ActionButton({
-  label, onClick, color, variant, fullWidth, icon: Icon, fontSize,
+  label,
+  onClick,
+  color = 'primary',
+  variant = 'contained',
+  fullWidth = false,
+  icon: Icon = null,
+  fontSize = '16px',
 }) {
   return (
     <Button
@@ -30,14 +36,6 @@ ActionButton.propTypes = {
   fullWidth: PropTypes.bool,
   icon: PropTypes.elementType,
   fontSize: PropTypes.string,
-};
-
-ActionButton.defaultProps = {
-  color: 'primary',
-  variant: 'contained',
-  fullWidth: false,
-  icon: null,
-  fontSize: '16px',
 };
 
 export default ActionButton;

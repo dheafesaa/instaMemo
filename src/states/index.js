@@ -7,7 +7,7 @@ const store = configureStore({
   reducer: {
     loadingBar: loadingBarReducer,
     authUser: authUserReducer,
-    users: usersReducer
+    users: usersReducer,
   },
 });
 
