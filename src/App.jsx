@@ -1,11 +1,18 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import {
+  Routes, Route, useLocation, useNavigate,
+} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { asyncPreloadProcess } from './states/isPreload/action';
 import { asyncUnsetAuthUser } from './states/authUser/action';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import Navbar from './components/molecules/Navbar';
+import ActivePage from './pages/ActivePage';
+import AddMemoPage from './pages/AddMemoPage';
+import DetailMemoPage from './pages/DetailMemoPage';
+import ArchievedPage from './pages/ArchievedPage';
+import EditMemoPage from './pages/EditMemoPage';
 
 function App() {
   const { authUser = null, isPreload = false } = useSelector(
@@ -15,13 +22,15 @@ function App() {
   const location = useLocation();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(asyncPreloadProcess());
   }, [dispatch]);
 
-  const onSignOut = () => {
+  const onLogout = () => {
     dispatch(asyncUnsetAuthUser());
+    navigate('/');
   };
 
   if (isPreload) {
@@ -33,12 +42,17 @@ function App() {
   return (
     <div className="app">
       <header>
-        {authUser && !isLoginOrRegisterPage && <Navbar authUser={authUser} onLogout={onSignOut} />}
+        {authUser && !isLoginOrRegisterPage && <Navbar onLogout={onLogout} />}
       </header>
       <main>
         <Routes>
           <Route path="/*" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/active" element={<ActivePage />} />
+          <Route path="/archives" element={<ArchievedPage />} />
+          <Route path="/add-memo" element={<AddMemoPage />} />
+          <Route path="/detail-memo/:id" element={<DetailMemoPage />} />
+          <Route path="/edit-memo/:id" element={<EditMemoPage />} />
         </Routes>
       </main>
     </div>

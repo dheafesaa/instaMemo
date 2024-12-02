@@ -9,6 +9,30 @@ const baseTheme = createTheme({
       main: '#3D3D3D',
       contrastText: '#FFFFFF',
     },
+    add: {
+      main: '#A5C3FF',
+    },
+    save: {
+      main: '#A5C3FF',
+    },
+    back: {
+      main: '#E8E8E8',
+    },
+    archive: {
+      main: '#FFDBA5',
+    },
+    unarchive: {
+      main: '#A5FFAE',
+    },
+    edit: {
+      main: '#A5C3FF',
+    },
+    delete: {
+      main: '#FFA5A5',
+    },
+    background: {
+      default: '#FFFFFF',
+    },
   },
 
   typography: {
@@ -16,22 +40,23 @@ const baseTheme = createTheme({
 
     h1: {
       fontSize: '64px',
-      fontWeight: 'bold',
+      fontWeight: 'medium',
     },
     h2: {
       fontSize: '48px',
-      fontWeight: 'bold',
+      fontWeight: 'medium',
     },
     h3: {
       fontSize: '40px',
-      fontWeight: 'bold',
+      fontWeight: 'medium',
     },
     h4: {
       fontSize: '32px',
-      fontWeight: 'bold',
+      fontWeight: 'medium',
     },
     h5: {
       fontSize: '28px',
+      fontWeight: 'medium',
     },
     h6: {
       fontSize: '20px',

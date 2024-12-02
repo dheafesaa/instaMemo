@@ -1,12 +1,12 @@
 const api = (() => {
-  const BASE_URL = 'https://restapi-greenway.vercel.app';
+  const BASE_URL = 'https://instamemo-api.vercel.app';
 
   function getAccessToken() {
     return localStorage.getItem('accessToken');
   }
 
-  function putAccessToken(token) {
-    localStorage.setItem('accessToken', token);
+  function putAccessToken(accessToken) {
+    localStorage.setItem('accessToken', accessToken);
   }
 
   async function register({ name, email, password }) {
@@ -34,11 +34,7 @@ const api = (() => {
       throw new Error(message);
     }
 
-    const {
-      data: { user },
-    } = responseJson;
-
-    return user;
+    return message;
   }
 
   async function login({ email, password }) {
@@ -62,10 +58,10 @@ const api = (() => {
     }
 
     const {
-      data: { token },
+      data: { accessToken },
     } = responseJson;
 
-    return token;
+    return accessToken;
   }
 
   async function _fetchWithAuth(url, options = {}) {
@@ -79,7 +75,7 @@ const api = (() => {
   }
 
   async function getOwnProfile() {
-    const response = await _fetchWithAuth(`${BASE_URL}/me`);
+    const response = await _fetchWithAuth(`${BASE_URL}/users/me`);
 
     const responseJson = await response.json();
 

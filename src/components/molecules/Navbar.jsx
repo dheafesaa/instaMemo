@@ -1,74 +1,103 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
-  AppBar, Toolbar, IconButton, Typography, Button, Drawer, List, ListItem, ListItemText,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { PiSignOutBold } from 'react-icons/pi';
 
-function ResponsiveNavbar() {
+function Navbar({ onLogout }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const location = useLocation();
 
   const toggleDrawer = (open) => () => {
     setDrawerOpen(open);
   };
 
   const navLinks = [
-    { title: 'Active', path: '/' },
-    { title: 'Archived', path: '/archived' },
+    { title: 'Active', path: '/active' },
+    { title: 'Archived', path: '/archives' },
   ];
 
   return (
     <>
-      <AppBar position="static" sx={{ bgcolor: '#FFFFFF', color: '#3D3D3D' }}>
-        <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <AppBar position="static" sx={{ bgcolor: 'background.default' }}>
+        <Toolbar
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
           <Typography
             variant="h4"
-            component={Link}
-            to="/"
+            component="h1"
             sx={{
               flexGrow: 1,
-              textDecoration: 'none',
-              color: '#3D3D3D',
               display: 'flex',
               alignItems: 'center',
+              color: 'text.primary',
             }}
           >
-            InstaMemo
+            <Link
+              to="/active"
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              InstaMemo
+            </Link>
           </Typography>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             {navLinks.map((link) => (
-              <Button
+              <Typography
                 key={link.title}
+                variant="h6"
                 component={Link}
                 to={link.path}
-                color="inherit"
                 sx={{
-                  textTransform: 'none',
+                  color: 'text.primary',
+                  textDecoration:
+                    location.pathname === link.path ? 'underline' : 'none',
+                  textUnderlineOffset:
+                    location.pathname === link.path ? '4px' : 'none',
                   display: { xs: 'none', md: 'inline-flex' },
                   alignItems: 'center',
-                  color: '#3D3D3D',
+                  mx: 3,
                 }}
               >
                 {link.title}
-              </Button>
+              </Typography>
             ))}
             <IconButton
               edge="end"
-              color="inherit"
               aria-label="menu"
               onClick={toggleDrawer(true)}
-              sx={{ display: { xs: 'inline-flex', md: 'none' }, color: '#3D3D3D' }}
+              sx={{
+                display: { xs: 'inline-flex', md: 'none' },
+                color: 'text.primary',
+              }}
             >
               <MenuIcon />
+            </IconButton>
+            <IconButton
+              edge="end"
+              aria-label="sign out"
+              onClick={onLogout}
+              sx={{ ml: 2, color: 'text.primary' }}
+            >
+              <PiSignOutBold />
             </IconButton>
           </div>
         </Toolbar>
       </AppBar>
-      <Drawer
-        anchor="right"
-        open={drawerOpen}
-        onClose={toggleDrawer(false)}
-      >
+      <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
         <List sx={{ width: 250 }}>
           {navLinks.map((link) => (
             <ListItem
@@ -77,22 +106,25 @@ function ResponsiveNavbar() {
               component={Link}
               to={link.path}
               onClick={toggleDrawer(false)}
-              sx={{ display: 'flex', alignItems: 'center', color: '#3D3D3D' }}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                color: 'text.primary',
+                textDecoration:
+                  location.pathname === link.path ? 'underline' : 'none',
+              }}
             >
               <ListItemText primary={link.title} />
             </ListItem>
           ))}
-          <ListItem
-            button
-            onClick={() => {
-              toggleDrawer(false)();
-            }}
-            sx={{ display: 'flex', alignItems: 'center', color: '#3D3D3D' }}
-          />
         </List>
       </Drawer>
     </>
   );
 }
 
-export default ResponsiveNavbar;
+Navbar.propTypes = {
+  onLogout: PropTypes.func.isRequired,
+};
+
+export default Navbar;
