@@ -1,23 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Container, Typography } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
 import SearchBar from '../components/atoms/SearchBar';
 import MemoList from '../components/organisms/MemoList';
+import { asyncReceiveAllArchivedMemo } from '../states/allMemo/action';
 
 function ArchievedPage() {
-  const memosData = [
-    {
-      id: '1', title: 'Memo 1', description: 'This is the first memo', createdAt: '2024-11-12',
-    },
-    {
-      id: '2', title: 'Memo 2', description: 'This is the second memo', createdAt: '2024-11-12',
-    },
-    {
-      id: '3', title: 'Memo 3', description: 'This is the third memo', createdAt: '2024-11-12',
-    },
-    {
-      id: '4', title: 'Memo 4', description: 'This is the fourth memo', createdAt: '2024-11-12',
-    },
-  ];
+  const dispatch = useDispatch();
+
+  const archivedMemos = useSelector((state) => state.getAllMemo?.archivedMemos);
+
+  useEffect(() => {
+    dispatch(asyncReceiveAllArchivedMemo());
+  }, [dispatch]);
 
   return (
     <Container maxWidth="lg">
@@ -25,7 +20,7 @@ function ArchievedPage() {
         <Typography variant="h5">Hi, Dhea!</Typography>
       </Box>
       <SearchBar placeholder="Search by title..." />
-      <MemoList memos={memosData} />
+      <MemoList memos={archivedMemos} />
     </Container>
   );
 }

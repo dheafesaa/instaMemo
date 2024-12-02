@@ -10,8 +10,8 @@ function MemoList({ memos }) {
   const itemsPerRow = 4;
 
   return (
-    <Grid container spacing={3} justifyContent="center" mt={4} mb={4}>
-      {memos.length === 0 ? (
+    <Grid container spacing={3} mt={4} mb={4}>
+      {memos?.length === 0 ? (
         <Grid item xs={12}>
           <Alert
             severity="info"
@@ -20,17 +20,17 @@ function MemoList({ memos }) {
           />
         </Grid>
       ) : (
-        memos.map((note, index) => {
+        memos?.map((memo, index) => {
           const rowIndex = Math.floor(index / itemsPerRow);
           const colorSequence = rowIndex % 2 === 0 ? rowColors1 : rowColors2;
           const color = colorSequence[index % itemsPerRow];
 
           return (
-            <Grid item xs={12} sm={6} md={3} key={note.id}>
+            <Grid item xs={12} sm={6} md={3} key={memo.id}>
               <MemoItem
-                title={note.title}
-                description={note.description}
-                createdAt={note.createdAt}
+                title={memo.title}
+                description={memo.body}
+                createdAt={memo.createdAt}
                 color={color}
               />
             </Grid>

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Typography } from '@mui/material';
 import MemoCard from '../atoms/MemoCard';
+import { showFormattedDate } from '../../utils';
 
 function MemoItem({
   color, title, description, createdAt,
@@ -10,7 +11,7 @@ function MemoItem({
     <MemoCard color={color}>
       <Typography variant="h6">{title}</Typography>
       <Typography variant="body2" component="p">
-        {createdAt}
+        {showFormattedDate(createdAt)}
       </Typography>
       <Typography component="p" sx={{ mt: 2 }}>
         {description}
