@@ -29,7 +29,7 @@ function MemoList({ memos }) {
             <Grid item xs={12} sm={6} md={3} key={memo.id}>
               <MemoItem
                 title={memo.title}
-                description={memo.body}
+                body={memo.body}
                 createdAt={memo.createdAt}
                 color={color}
               />
@@ -46,7 +46,7 @@ MemoList.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
+      body: PropTypes.string.isRequired,
       createdAt: PropTypes.string.isRequired,
     }),
   ).isRequired,

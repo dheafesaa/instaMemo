@@ -118,6 +118,29 @@ const api = (() => {
     return data;
   }
 
+  async function createMemo(payload) {
+    try {
+      const response = await _fetchWithAuth(`${BASE_URL}/memo/add-memo`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const responseJson = await response.json();
+      const { status, message, data } = responseJson;
+
+      if (status !== 'success') {
+        throw new Error(message || 'An error occurred while creating the memo.');
+      }
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message || 'Failed to create memo.');
+    }
+  }
+
   return {
     putAccessToken,
     getAccessToken,
@@ -126,6 +149,7 @@ const api = (() => {
     getOwnProfile,
     getAllActiveMemo,
     getAllArchivedMemo,
+    createMemo,
   };
 })();
 

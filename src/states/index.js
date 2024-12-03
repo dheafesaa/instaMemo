@@ -3,6 +3,7 @@ import { loadingBarReducer } from 'react-redux-loading-bar';
 import authUserReducer from './authUser/reducer';
 import usersReducer from './users/reducer';
 import getAllMemoReducer from './allMemo/reducer';
+import createMemoReducer from './createMemo/reducer';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     authUser: authUserReducer,
     users: usersReducer,
     getAllMemo: getAllMemoReducer,
+    createMemo: createMemoReducer,
   },
 });
 
