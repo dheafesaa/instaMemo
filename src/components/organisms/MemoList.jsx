@@ -28,6 +28,7 @@ function MemoList({ memos }) {
           return (
             <Grid item xs={12} sm={6} md={3} key={memo.id}>
               <MemoItem
+                id={memo.id}
                 title={memo.title}
                 body={memo.body}
                 createdAt={memo.createdAt}

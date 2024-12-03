@@ -1,63 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { Box } from '@mui/material';
-import { MdOutlineArrowBackIos } from 'react-icons/md';
 import {
   RiInboxArchiveLine,
   RiInboxUnarchiveLine,
   RiEditBoxLine,
   RiDeleteBin6Line,
 } from 'react-icons/ri';
-import ActionButton from '../atoms/ActionButton';
+import HeaderSection from '../organisms/HeaderSection';
 
 function DetailActionButton({ isArchived, onArchive, onDelete }) {
   const navigate = useNavigate();
 
-  const buttonConfigs = [
+  const actions = [
     {
-      id: 'back',
-      label: 'Back',
-      color: 'back',
-      icon: MdOutlineArrowBackIos,
-      onClick: () => navigate(isArchived ? '/archived' : '/active'),
-    },
-    {
-      id: isArchived ? 'unarchive' : 'archive',
+      id: 'isArchived',
       label: isArchived ? 'Unarchive' : 'Archive',
+      onClick: onArchive,
       color: isArchived ? 'unarchive' : 'archive',
       icon: isArchived ? RiInboxUnarchiveLine : RiInboxArchiveLine,
-      onClick: { onArchive },
     },
     {
       id: 'edit',
       label: 'Edit',
+      onClick: () => navigate(`/edit-memo/${isArchived}`),
       color: 'edit',
       icon: RiEditBoxLine,
-      onClick: () => navigate('/edit-memo/:id'),
     },
     {
       id: 'delete',
       label: 'Delete',
+      onClick: onDelete,
       color: 'delete',
       icon: RiDeleteBin6Line,
-      onClick: { onDelete },
     },
   ];
 
   return (
-    <Box display="flex" gap={3}>
-      {buttonConfigs.map((button) => (
-        <ActionButton
-          key={button.id}
-          label={button.label}
-          color={button.color}
-          icon={button.icon}
-          variant="contained"
-          onClick={button.onClick}
-        />
-      ))}
-    </Box>
+    <HeaderSection
+      title="Memo Details"
+      onBack={() => navigate(isArchived ? '/archives' : '/active')}
+      actions={actions}
+    />
   );
 }
 
