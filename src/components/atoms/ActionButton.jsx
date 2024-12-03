@@ -31,7 +31,7 @@ function ActionButton({
 ActionButton.propTypes = {
   label: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
-  color: PropTypes.oneOf(['primary', 'success', 'error', 'add']),
+  color: PropTypes.oneOf(['primary', 'success', 'error', 'add', 'save', 'back', 'edit']),
   variant: PropTypes.oneOf(['text', 'outlined', 'contained']),
   fullWidth: PropTypes.bool,
   icon: PropTypes.elementType,
