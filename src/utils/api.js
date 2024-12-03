@@ -141,6 +141,20 @@ const api = (() => {
     }
   }
 
+  async function getDetailMemo(id) {
+    const response = await _fetchWithAuth(`${BASE_URL}/memo/${id}`);
+
+    const responseJson = await response.json();
+
+    const { status, message, data } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    return data;
+  }
+
   return {
     putAccessToken,
     getAccessToken,
@@ -150,6 +164,7 @@ const api = (() => {
     getAllActiveMemo,
     getAllArchivedMemo,
     createMemo,
+    getDetailMemo,
   };
 })();
 

@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
 
-function MemoCard({
-  color,
-  children = null,
-}) {
+function MemoCard({ color, onClick, children = null }) {
   return (
     <Box
+      onClick={onClick}
       sx={{
         backgroundColor: color,
         width: '100%',
@@ -16,6 +14,7 @@ function MemoCard({
         padding: 2,
         display: 'flex',
         flexDirection: 'column',
+        cursor: 'pointer',
       }}
     >
       {children}
@@ -25,6 +24,7 @@ function MemoCard({
 
 MemoCard.propTypes = {
   color: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
   children: PropTypes.node,
 };
 
