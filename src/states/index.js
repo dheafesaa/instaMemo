@@ -5,6 +5,7 @@ import usersReducer from './users/reducer';
 import getAllMemoReducer from './allMemo/reducer';
 import createMemoReducer from './createMemo/reducer';
 import detailMemoReducer from './detailMemo/reducer';
+import deleteMemoReducer from './deleteMemo/reducer';
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     getAllMemo: getAllMemoReducer,
     createMemo: createMemoReducer,
     detailMemo: detailMemoReducer,
+    deleteMemo: deleteMemoReducer,
   },
 });
 
