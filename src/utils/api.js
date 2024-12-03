@@ -155,6 +155,22 @@ const api = (() => {
     return data;
   }
 
+  async function deleteMemo(id) {
+    const response = await _fetchWithAuth(`${BASE_URL}/memo/${id}`, {
+      method: 'DELETE',
+    });
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message || 'Failed to delete memo.');
+    }
+
+    return message;
+  }
+
   return {
     putAccessToken,
     getAccessToken,
@@ -165,6 +181,7 @@ const api = (() => {
     getAllArchivedMemo,
     createMemo,
     getDetailMemo,
+    deleteMemo,
   };
 })();
 
