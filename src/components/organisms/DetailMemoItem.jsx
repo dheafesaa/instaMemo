@@ -5,11 +5,12 @@ import InputField from '../atoms/InputField';
 import DetailActionButton from '../molecules/DetailActionButton';
 
 function DetailMemoItem({
-  title, body, isArchived, onArchive, onDelete,
+  id, title, body, isArchived, onArchive, onDelete,
 }) {
   return (
     <>
       <DetailActionButton
+        id={id}
         isArchived={isArchived}
         onArchive={onArchive}
         onDelete={onDelete}
@@ -30,6 +31,7 @@ function DetailMemoItem({
 }
 
 DetailMemoItem.propTypes = {
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   body: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   isArchived: PropTypes.bool.isRequired,

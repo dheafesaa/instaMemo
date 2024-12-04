@@ -9,7 +9,9 @@ import {
 } from 'react-icons/ri';
 import HeaderSection from '../organisms/HeaderSection';
 
-function DetailActionButton({ isArchived, onArchive, onDelete }) {
+function DetailActionButton({
+  id, isArchived, onArchive, onDelete,
+}) {
   const navigate = useNavigate();
 
   const actions = [
@@ -20,10 +22,10 @@ function DetailActionButton({ isArchived, onArchive, onDelete }) {
       color: isArchived ? 'unarchive' : 'archive',
       icon: isArchived ? RiInboxUnarchiveLine : RiInboxArchiveLine,
     },
-    {
+    !isArchived && {
       id: 'edit',
       label: 'Edit',
-      onClick: () => navigate(`/edit-memo/${isArchived}`),
+      onClick: () => navigate(`/edit-memo/${id}`),
       color: 'edit',
       icon: RiEditBoxLine,
     },
@@ -34,7 +36,7 @@ function DetailActionButton({ isArchived, onArchive, onDelete }) {
       color: 'delete',
       icon: RiDeleteBin6Line,
     },
-  ];
+  ].filter(Boolean);
 
   return (
     <HeaderSection
@@ -46,6 +48,7 @@ function DetailActionButton({ isArchived, onArchive, onDelete }) {
 }
 
 DetailActionButton.propTypes = {
+  id: PropTypes.string.isRequired,
   isArchived: PropTypes.bool.isRequired,
   onArchive: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,

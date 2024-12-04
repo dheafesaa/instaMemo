@@ -171,6 +171,26 @@ const api = (() => {
     return message;
   }
 
+  async function editMemo(id, payload) {
+    const response = await _fetchWithAuth(`${BASE_URL}/memo/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const responseJson = await response.json();
+
+    const { status, message, data } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message || 'Failed to update memo.');
+    }
+
+    return data;
+  }
+
   return {
     putAccessToken,
     getAccessToken,
@@ -182,6 +202,7 @@ const api = (() => {
     createMemo,
     getDetailMemo,
     deleteMemo,
+    editMemo,
   };
 })();
 

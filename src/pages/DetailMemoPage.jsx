@@ -11,9 +11,9 @@ function DetailMemoPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isDialogOpen, setDialogOpen] = useState(false);
 
   const detailMemo = useSelector((state) => state.detailMemo?.detailMemo);
-  const [isDialogOpen, setDialogOpen] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -43,6 +43,7 @@ function DetailMemoPage() {
   return (
     <Container maxWidth="lg">
       <DetailMemoItem
+        id={id}
         title={detailMemo.title}
         body={detailMemo.body}
         isArchived={detailMemo.archived}
