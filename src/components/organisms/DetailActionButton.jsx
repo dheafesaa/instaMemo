@@ -7,7 +7,7 @@ import {
   RiEditBoxLine,
   RiDeleteBin6Line,
 } from 'react-icons/ri';
-import HeaderSection from '../organisms/HeaderSection';
+import HeaderSection from './HeaderSection';
 
 function DetailActionButton({
   id, isArchived, onArchive, onDelete,
