@@ -19,6 +19,7 @@
         "react-hooks"
     ],
     "rules": {
+        "max-len": ["error", { "code": 120 }],
         "linebreak-style": "off",
         "no-alert": "off",
         "no-underscore-dangle": "off",

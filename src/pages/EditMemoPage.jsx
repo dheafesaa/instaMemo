@@ -1,36 +1,39 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Box, Container, Typography } from '@mui/material';
-import { MdOutlineArrowBackIos } from 'react-icons/md';
-import { FiSave } from 'react-icons/fi';
-import ActionButton from '../components/atoms/ActionButton';
+import React, { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Container } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { asyncEditMemo } from '../states/editMemo/action';
+import { asyncReceiveDetailMemo } from '../states/detailMemo/action';
 import EditInput from '../components/organisms/EditInput';
 
 function EditMemoPage() {
+  const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const detailMemo = useSelector((state) => state.detailMemo?.detailMemo);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(asyncReceiveDetailMemo(id));
+    }
+  }, [dispatch, id]);
+
+  const onEditMemo = async (updatedMemo) => {
+    await dispatch(asyncEditMemo(id, updatedMemo, navigate));
+  };
+
+  if (!detailMemo) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Container maxWidth="lg">
-      <Box display="flex" justifyContent="space-between" alignItems="center" mt={4} mb={4}>
-        <Typography variant="h5">Edit Your Memo</Typography>
-        <Box display="flex" gap={3}>
-          <ActionButton
-            label="Back"
-            onClick={() => navigate(-1)}
-            color="back"
-            variant="contained"
-            icon={MdOutlineArrowBackIos}
-          />
-          <ActionButton
-            label="Save"
-            onClick={() => navigate('/active')}
-            color="save"
-            variant="contained"
-            icon={FiSave}
-          />
-        </Box>
-      </Box>
-      <EditInput />
+      <EditInput
+        detailMemo={detailMemo}
+        onEditMemo={onEditMemo}
+        onBack={() => navigate(detailMemo.archived ? '/archives' : '/active')}
+      />
     </Container>
   );
 }
