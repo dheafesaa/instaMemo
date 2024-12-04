@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
 import InputField from '../atoms/InputField';
-import DetailActionButton from '../molecules/DetailActionButton';
+import DetailActionButton from './DetailActionButton';
 
 function DetailMemoItem({
   id, title, body, isArchived, onArchive, onDelete,
