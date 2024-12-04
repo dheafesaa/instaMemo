@@ -191,6 +191,40 @@ const api = (() => {
     return data;
   }
 
+  async function archiveMemo(id) {
+    const response = await _fetchWithAuth(`${BASE_URL}/memo/${id}/archive`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const responseJson = await response.json();
+
+    if (responseJson.status !== 'success') {
+      throw new Error(responseJson.message || 'Failed to archive memo.');
+    }
+
+    return responseJson.data;
+  }
+
+  async function unarchiveMemo(id) {
+    const response = await _fetchWithAuth(`${BASE_URL}/memo/${id}/unarchive`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const responseJson = await response.json();
+
+    if (responseJson.status !== 'success') {
+      throw new Error(responseJson.message || 'Failed to unarchive memo.');
+    }
+
+    return responseJson.data;
+  }
+
   return {
     putAccessToken,
     getAccessToken,
@@ -203,6 +237,8 @@ const api = (() => {
     getDetailMemo,
     deleteMemo,
     editMemo,
+    archiveMemo,
+    unarchiveMemo,
   };
 })();
 

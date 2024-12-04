@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { asyncReceiveDetailMemo } from '../states/detailMemo/action';
 import { asyncSetDeleteMemo } from '../states/deleteMemo/action';
+import { asyncArchiveMemo, asyncUnarchiveMemo } from '../states/statusMemo/action';
 import ConfirmDialog from '../components/molecules/ConfirmDialog';
 import DetailMemoItem from '../components/organisms/DetailMemoItem';
 
@@ -21,7 +22,13 @@ function DetailMemoPage() {
     }
   }, [dispatch, id]);
 
-  const handleIsArchiveMemo = async () => {};
+  const handleStatusActionMemo = async () => {
+    if (detailMemo?.archived) {
+      await dispatch(asyncUnarchiveMemo(id, navigate));
+    } else {
+      await dispatch(asyncArchiveMemo(id, navigate));
+    }
+  };
 
   const handleDeleteMemo = () => {
     setDialogOpen(true);
@@ -47,7 +54,7 @@ function DetailMemoPage() {
         title={detailMemo.title}
         body={detailMemo.body}
         isArchived={detailMemo.archived}
-        onArchive={handleIsArchiveMemo}
+        onArchive={handleStatusActionMemo}
         onDelete={handleDeleteMemo}
       />
       <ConfirmDialog

@@ -7,6 +7,7 @@ import createMemoReducer from './createMemo/reducer';
 import detailMemoReducer from './detailMemo/reducer';
 import deleteMemoReducer from './deleteMemo/reducer';
 import editMemoReducer from './editMemo/reducer';
+import statusMemoReducer from './statusMemo/reducer';
 
 const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
     detailMemo: detailMemoReducer,
     deleteMemo: deleteMemoReducer,
     editMemo: editMemoReducer,
+    statusMemo: statusMemoReducer,
   },
 });
 
