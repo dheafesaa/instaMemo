@@ -16,7 +16,7 @@ function MemoList({ memos, basePath }) {
           <Alert
             severity="info"
             title="Information"
-            body="No memos available. Please add a new memo to get started!"
+            body="No memos available."
           />
         </Grid>
       ) : (
