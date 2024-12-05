@@ -1,54 +1,42 @@
 import api from '../../utils/api';
 
 const ActionType = {
-  RECEIVE_ACTIVEMEMO: 'RECEIVE_ACTIVEMEMO',
-  RECEIVE_ARCHIVEDMEMO: 'RECEIVE_ARCHIVEDMEMO',
+  RECEIVE_ACTIVE_MEMO: 'RECEIVE_ACTIVE_MEMO',
+  RECEIVE_ARCHIVED_MEMO: 'RECEIVE_ARCHIVED_MEMO',
 };
 
-function receiveAllActiveMemo(activeMemo) {
-  return {
-    type: ActionType.RECEIVE_ACTIVEMEMO,
-    payload: {
-      activeMemo,
-    },
-  };
-}
+const receiveActiveMemo = (activeMemos) => ({
+  type: ActionType.RECEIVE_ACTIVE_MEMO,
+  payload: activeMemos,
+});
 
-function receiveAllArchivedMemo(archivedMemo) {
-  return {
-    type: ActionType.RECEIVE_ARCHIVEDMEMO,
-    payload: {
-      archivedMemo,
-    },
-  };
-}
+const receiveArchivedMemo = (archivedMemos) => ({
+  type: ActionType.RECEIVE_ARCHIVED_MEMO,
+  payload: archivedMemos,
+});
 
-function asyncReceiveAllActiveMemo() {
-  return async (dispatch) => {
-    try {
-      const activeMemoData = await api.getAllActiveMemo();
-      dispatch(receiveAllActiveMemo(activeMemoData));
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-}
+const asyncReceiveAllActiveMemo = () => async (dispatch) => {
+  try {
+    const activeMemos = await api.getAllActiveMemo();
+    dispatch(receiveActiveMemo(activeMemos));
+  } catch (error) {
+    alert(error.message);
+  }
+};
 
-function asyncReceiveAllArchivedMemo() {
-  return async (dispatch) => {
-    try {
-      const archivedMemoData = await api.getAllArchivedMemo();
-      dispatch(receiveAllArchivedMemo(archivedMemoData));
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-}
+const asyncReceiveAllArchivedMemo = () => async (dispatch) => {
+  try {
+    const archivedMemos = await api.getAllArchivedMemo();
+    dispatch(receiveArchivedMemo(archivedMemos));
+  } catch (error) {
+    alert(error.message);
+  }
+};
 
 export {
   ActionType,
-  receiveAllActiveMemo,
-  receiveAllArchivedMemo,
+  receiveActiveMemo,
+  receiveArchivedMemo,
   asyncReceiveAllActiveMemo,
   asyncReceiveAllArchivedMemo,
 };

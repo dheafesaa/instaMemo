@@ -14,10 +14,17 @@ const shuffleArray = (array) => array
   .map(({ value }) => value);
 
 const filterMemos = (memos, keyword) => {
-  if (!keyword) return memos;
-  const lowerCaseKeyword = keyword.toLowerCase();
+  if (!memos) return [];
 
-  return memos.filter((memo) => memo.title.toLowerCase().includes(lowerCaseKeyword));
+  const clonedMemos = [...memos];
+
+  const filteredMemos = clonedMemos.filter((memo) => memo.title.toLowerCase().includes(keyword.toLowerCase()));
+
+  return filteredMemos.sort((a, b) => {
+    const dateA = new Date(a.updatedAt || a.createdAt);
+    const dateB = new Date(b.updatedAt || b.createdAt);
+    return dateB - dateA;
+  });
 };
 
 export { showFormattedDate, shuffleArray, filterMemos };
