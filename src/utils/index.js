@@ -13,4 +13,11 @@ const shuffleArray = (array) => array
   .sort((a, b) => a.sort - b.sort)
   .map(({ value }) => value);
 
-export { showFormattedDate, shuffleArray };
+const filterMemos = (memos, keyword) => {
+  if (!keyword) return memos;
+  const lowerCaseKeyword = keyword.toLowerCase();
+
+  return memos.filter((memo) => memo.title.toLowerCase().includes(lowerCaseKeyword));
+};
+
+export { showFormattedDate, shuffleArray, filterMemos };
