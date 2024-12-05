@@ -7,7 +7,7 @@ import { asyncSetDeleteMemo } from '../states/deleteMemo/action';
 import { asyncArchiveMemo, asyncUnarchiveMemo } from '../states/statusMemo/action';
 import DetailMemoItem from '../components/organisms/DetailMemoItem';
 import CustomizedSnackbar from '../components/atoms/Snackbar';
-import ConfirmDialog from '../components/molecules/ConfirmDialog';
+import ConfirmDialog from '../components/atoms/ConfirmDialog';
 
 function DetailMemoPage() {
   const { id } = useParams();
@@ -25,7 +25,7 @@ function DetailMemoPage() {
     }
   }, [dispatch, id]);
 
-  const handleStatusActionMemo = async () => {
+  const onArchive = async () => {
     try {
       if (detailMemo.archived) {
         await dispatch(asyncUnarchiveMemo(id));
@@ -46,19 +46,13 @@ function DetailMemoPage() {
     }
   };
 
-  const handleSnackbarClose = () => setIsSnackbarOpen(false);
-
-  const handleDeleteMemo = () => {
+  const onDeleteMemo = () => {
     setDialogOpen(true);
   };
 
   const handleConfirmDelete = async () => {
     setDialogOpen(false);
     await dispatch(asyncSetDeleteMemo(id, navigate));
-  };
-
-  const handleCancelDelete = () => {
-    setDialogOpen(false);
   };
 
   if (!detailMemo) {
@@ -72,20 +66,21 @@ function DetailMemoPage() {
         title={detailMemo.title}
         body={detailMemo.body}
         isArchived={detailMemo.archived}
-        onArchive={handleStatusActionMemo}
-        onDelete={handleDeleteMemo}
+        onArchive={onArchive}
+        onDelete={onDeleteMemo}
       />
       <CustomizedSnackbar
         isOpen={isSnackbarOpen}
-        onClose={handleSnackbarClose}
+        onClose={() => setIsSnackbarOpen(false)}
         message={snackbarMessage}
       />
       <ConfirmDialog
         open={isDialogOpen}
         title="Delete Memo"
         content="Are you sure you want to delete this memo? This action cannot be undone."
+        confirmButtonColor="error"
         onConfirm={handleConfirmDelete}
-        onCancel={handleCancelDelete}
+        onCancel={() => setDialogOpen(false)}
       />
     </Container>
   );

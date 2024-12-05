@@ -11,12 +11,11 @@ function editMemo(data) {
   };
 }
 
-function asyncEditMemo(id, updatedMemo, navigate) {
+function asyncEditMemo(id, updatedMemo) {
   return async (dispatch) => {
     try {
       const updatedMemoData = await api.editMemo(id, updatedMemo);
       dispatch(editMemo(updatedMemoData));
-      navigate('/active');
     } catch (error) {
       alert(error.message);
     }
