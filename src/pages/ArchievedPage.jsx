@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Container, Typography } from '@mui/material';
+import { Container } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import SearchBar from '../components/atoms/SearchBar';
+import HeaderSection from '../components/organisms/HeaderSection';
 import MemoList from '../components/organisms/MemoList';
 import { asyncReceiveAllArchivedMemo } from '../states/allMemo/action';
 import { filterMemos } from '../utils';
@@ -13,6 +14,7 @@ function ArchievedPage() {
   const keywordFromURL = searchParams.get('search') || '';
   const [keyword, setKeyword] = useState(keywordFromURL);
 
+  const authUser = useSelector((state) => state.authUser);
   const archivedMemos = useSelector((state) => state.getAllMemo?.archivedMemos);
 
   useEffect(() => {
@@ -27,9 +29,9 @@ function ArchievedPage() {
 
   return (
     <Container maxWidth="lg">
-      <Box display="flex" justifyContent="space-between" alignItems="center" mt={4} mb={4}>
-        <Typography variant="h5">Hi, Dhea!</Typography>
-      </Box>
+      <HeaderSection
+        title={`Hi, ${authUser?.name || 'User'}!`}
+      />
       <SearchBar
         placeholder="Search by title..."
         value={keyword}
