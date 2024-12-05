@@ -24,8 +24,10 @@ function Navbar({ onLogout }) {
 
   const navLinks = [
     { title: 'Active', path: '/active' },
-    { title: 'Archived', path: '/archives' },
+    { title: 'Archived', path: '/archived' },
   ];
+
+  const isLinkActive = (path) => location.pathname.startsWith(path);
 
   return (
     <>
@@ -63,10 +65,8 @@ function Navbar({ onLogout }) {
                 to={link.path}
                 sx={{
                   color: 'text.primary',
-                  textDecoration:
-                    location.pathname === link.path ? 'underline' : 'none',
-                  textUnderlineOffset:
-                    location.pathname === link.path ? '4px' : 'none',
+                  textDecoration: isLinkActive(link.path) ? 'underline' : 'none',
+                  textUnderlineOffset: isLinkActive(link.path) ? '4px' : 'none',
                   display: { xs: 'none', md: 'inline-flex' },
                   alignItems: 'center',
                   mx: 3,
@@ -110,8 +110,7 @@ function Navbar({ onLogout }) {
                 display: 'flex',
                 alignItems: 'center',
                 color: 'text.primary',
-                textDecoration:
-                  location.pathname === link.path ? 'underline' : 'none',
+                textDecoration: isLinkActive(link.path) ? 'underline' : 'none',
               }}
             >
               <ListItemText primary={link.title} />

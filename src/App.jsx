@@ -49,10 +49,11 @@ function App() {
           <Route path="/*" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/active" element={<ActivePage />} />
-          <Route path="/archives" element={<ArchievedPage />} />
-          <Route path="/add-memo" element={<AddMemoPage />} />
-          <Route path="/detail-memo/:id" element={<DetailMemoPage />} />
-          <Route path="/edit-memo/:id" element={<EditMemoPage />} />
+          <Route path="/active/add-memo" element={<AddMemoPage />} />
+          <Route path="/active/edit-memo/:id" element={<EditMemoPage />} />
+          <Route path="/active/detail-memo/:id" element={<DetailMemoPage />} />
+          <Route path="/archived" element={<ArchievedPage />} />
+          <Route path="/archived/detail-memo/:id" element={<DetailMemoPage />} />
         </Routes>
       </main>
     </div>

@@ -4,7 +4,7 @@ import { Grid } from '@mui/material';
 import Alert from '../atoms/Alert';
 import MemoItem from '../molecules/MemoItem';
 
-function MemoList({ memos }) {
+function MemoList({ memos, basePath }) {
   const rowColors1 = ['#A5FFFF', '#FFF0A1', '#FFA7FB', '#FF7F96'];
   const rowColors2 = ['#FFA7FB', '#FF7F96', '#A5FFFF', '#FFF0A1'];
   const itemsPerRow = 4;
@@ -33,6 +33,7 @@ function MemoList({ memos }) {
                 body={memo.body}
                 createdAt={memo.createdAt}
                 color={color}
+                basePath={basePath}
               />
             </Grid>
           );
@@ -51,6 +52,7 @@ MemoList.propTypes = {
       createdAt: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  basePath: PropTypes.string.isRequired,
 };
 
 export default MemoList;

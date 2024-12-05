@@ -20,7 +20,7 @@ function ArchievedPage() {
         <Typography variant="h5">Hi, Dhea!</Typography>
       </Box>
       <SearchBar placeholder="Search by title..." />
-      <MemoList memos={archivedMemos} />
+      <MemoList memos={archivedMemos} basePath="/archived" />
     </Container>
   );
 }

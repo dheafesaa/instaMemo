@@ -24,14 +24,14 @@ function ActivePage() {
         <Typography variant="h5">Hi, Dhea!</Typography>
         <ActionButton
           label="New Memo"
-          onClick={() => navigate('/add-memo')}
+          onClick={() => navigate('/active/add-memo')}
           color="add"
           variant="contained"
           icon={FiPlus}
         />
       </Box>
       <SearchBar placeholder="Search by title..." />
-      <MemoList memos={activeMemos} />
+      <MemoList memos={activeMemos} basePath="/active" />
     </Container>
   );
 }

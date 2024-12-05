@@ -38,7 +38,7 @@ function DetailMemoPage() {
       setIsSnackbarOpen(true);
 
       setTimeout(() => {
-        navigate(detailMemo.archived ? '/archives' : '/active');
+        navigate(detailMemo.archived ? '/archived' : '/active');
       }, 3000);
     } catch (error) {
       setSnackbarMessage('Failed to update archive status.');

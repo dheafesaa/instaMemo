@@ -44,7 +44,7 @@ function EditMemoPage() {
       <EditInput
         detailMemo={detailMemo}
         onEditMemo={onEditMemo}
-        onBack={() => navigate(detailMemo.archived ? '/archives' : '/active')}
+        onBack={() => navigate(detailMemo.archived ? '/archived' : '/active')}
       />
       <ConfirmDialog
         open={isDialogOpen}

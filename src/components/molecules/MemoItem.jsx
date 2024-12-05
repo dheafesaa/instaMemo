@@ -6,12 +6,12 @@ import MemoCard from '../atoms/MemoCard';
 import { showFormattedDate } from '../../utils';
 
 function MemoItem({
-  color, id, title, body, createdAt,
+  basePath, color, id, title, body, createdAt,
 }) {
   const navigate = useNavigate();
 
   const handleDetailMemo = () => {
-    navigate(`/detail-memo/${id}`);
+    navigate(`${basePath}/detail-memo/${id}`);
   };
 
   return (
@@ -28,6 +28,7 @@ function MemoItem({
 }
 
 MemoItem.propTypes = {
+  basePath: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
