@@ -22,7 +22,11 @@ function ArchievedPage() {
   }, [dispatch]);
 
   useEffect(() => {
-    setSearchParams({ search: keyword });
+    if (keyword) {
+      setSearchParams({ search: keyword });
+    } else {
+      setSearchParams({});
+    }
   }, [keyword, setSearchParams]);
 
   const filteredArchivedMemos = filterMemos(archivedMemos, keyword);

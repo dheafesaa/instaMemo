@@ -65,6 +65,8 @@ function DetailMemoPage() {
         id={id}
         title={detailMemo.title}
         body={detailMemo.body}
+        createdAt={detailMemo.createdAt}
+        updatedAt={detailMemo.updatedAt}
         isArchived={detailMemo.archived}
         onArchive={onArchive}
         onDelete={onDeleteMemo}

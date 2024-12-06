@@ -1,11 +1,20 @@
-const showFormattedDate = (date) => {
-  const options = {
-    weekday: 'long',
+const showFormattedDateTime = (date) => {
+  const optionsDate = {
     year: 'numeric',
-    month: 'long',
+    month: 'short',
     day: 'numeric',
   };
-  return new Date(date).toLocaleDateString('id-ID', options);
+
+  const optionsTime = {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  };
+
+  const formattedDate = new Date(date).toLocaleDateString('id-ID', optionsDate);
+  const formattedTime = new Date(date).toLocaleTimeString('id-ID', optionsTime);
+
+  return `${formattedDate} at ${formattedTime}`;
 };
 
 const shuffleArray = (array) => array
@@ -27,4 +36,4 @@ const filterMemos = (memos, keyword) => {
   });
 };
 
-export { showFormattedDate, shuffleArray, filterMemos };
+export { showFormattedDateTime, shuffleArray, filterMemos };

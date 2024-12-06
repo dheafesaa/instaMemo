@@ -9,6 +9,7 @@ function MemoCard({ color, onClick, children = null }) {
       sx={{
         backgroundColor: color,
         width: '100%',
+        height: '200px',
         paddingTop: '100%',
         borderRadius: '12px',
         padding: 2,

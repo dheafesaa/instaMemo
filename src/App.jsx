@@ -43,19 +43,13 @@ function App() {
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          {authUser ? (
-            <>
-              <Route path="/active" element={<ActivePage />} />
-              <Route path="/active/add-memo" element={<AddMemoPage />} />
-              <Route path="/active/edit-memo/:id" element={<EditMemoPage />} />
-              <Route path="/active/detail-memo/:id" element={<DetailMemoPage />} />
-              <Route path="/archived" element={<ArchievedPage />} />
-              <Route path="/archived/detail-memo/:id" element={<DetailMemoPage />} />
-              <Route path="*" element={<Navigate to="/active" replace />} />
-            </>
-          ) : (
-            <Route path="*" element={<Navigate to="/login" replace />} />
-          )}
+          <Route path="/active" element={<ActivePage />} />
+          <Route path="/active/add-memo" element={<AddMemoPage />} />
+          <Route path="/active/edit-memo/:id" element={<EditMemoPage />} />
+          <Route path="/active/detail-memo/:id" element={<DetailMemoPage />} />
+          <Route path="/archived" element={<ArchievedPage />} />
+          <Route path="/archived/detail-memo/:id" element={<DetailMemoPage />} />
+          <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </main>
     </div>

@@ -32,6 +32,7 @@ function MemoList({ memos, basePath }) {
                 title={memo.title}
                 body={memo.body}
                 createdAt={memo.createdAt}
+                updatedAt={memo.updatedAt}
                 color={color}
                 basePath={basePath}
               />
@@ -50,6 +51,7 @@ MemoList.propTypes = {
       title: PropTypes.string.isRequired,
       body: PropTypes.string.isRequired,
       createdAt: PropTypes.string.isRequired,
+      updatedAt: PropTypes.string,
     }),
   ).isRequired,
   basePath: PropTypes.string.isRequired,

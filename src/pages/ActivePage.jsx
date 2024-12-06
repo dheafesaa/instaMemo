@@ -23,7 +23,11 @@ function ActivePage() {
   }, [dispatch]);
 
   useEffect(() => {
-    setSearchParams({ search: keyword });
+    if (keyword) {
+      setSearchParams({ search: keyword });
+    } else {
+      setSearchParams({});
+    }
   }, [keyword, setSearchParams]);
 
   const filteredActiveMemos = filterMemos(activeMemos, keyword);
