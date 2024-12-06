@@ -15,6 +15,7 @@ function DetailMemoPage() {
   const navigate = useNavigate();
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState(null);
   const [isDialogOpen, setDialogOpen] = useState(false);
 
   const detailMemo = useSelector((state) => state.detailMemo?.detailMemo);
@@ -35,6 +36,7 @@ function DetailMemoPage() {
         setSnackbarMessage('Memo archived successfully!');
       }
 
+      setSnackbarSeverity('success');
       setIsSnackbarOpen(true);
 
       setTimeout(() => {
@@ -42,6 +44,7 @@ function DetailMemoPage() {
       }, 3000);
     } catch (error) {
       setSnackbarMessage('Failed to update archive status.');
+      setSnackbarSeverity('error');
       setIsSnackbarOpen(true);
     }
   };
@@ -51,8 +54,21 @@ function DetailMemoPage() {
   };
 
   const handleConfirmDelete = async () => {
-    setDialogOpen(false);
-    await dispatch(asyncSetDeleteMemo(id, navigate));
+    try {
+      setDialogOpen(false);
+      await dispatch(asyncSetDeleteMemo(id));
+      setSnackbarMessage('Memo deleted successfully!');
+      setSnackbarSeverity('success');
+      setIsSnackbarOpen(true);
+
+      setTimeout(() => {
+        navigate(detailMemo.archived ? '/archived' : '/active');
+      }, 3000);
+    } catch (error) {
+      setSnackbarMessage('Failed to delete memo. Please try again.');
+      setSnackbarSeverity('error');
+      setIsSnackbarOpen(true);
+    }
   };
 
   if (!detailMemo) {
@@ -75,6 +91,7 @@ function DetailMemoPage() {
         isOpen={isSnackbarOpen}
         onClose={() => setIsSnackbarOpen(false)}
         message={snackbarMessage}
+        severity={snackbarSeverity}
       />
       <ConfirmDialog
         open={isDialogOpen}

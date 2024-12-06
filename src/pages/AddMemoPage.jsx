@@ -5,10 +5,14 @@ import { useDispatch } from 'react-redux';
 import { asyncCreateMemo } from '../states/createMemo/action';
 import AddInput from '../components/organisms/AddInput';
 import ConfirmDialog from '../components/atoms/ConfirmDialog';
+import CustomizedSnackbar from '../components/atoms/Snackbar';
 
 function AddMemoPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState(null);
   const [isDialogOpen, setDialogOpen] = useState(false);
   const [memoData, setMemoData] = useState(null);
 
@@ -20,8 +24,20 @@ function AddMemoPage() {
   const handleConfirmCreate = async () => {
     setDialogOpen(false);
     if (memoData) {
-      await dispatch(asyncCreateMemo(memoData));
-      navigate('/active');
+      try {
+        await dispatch(asyncCreateMemo(memoData));
+        setSnackbarMessage('Memo created successfully!');
+        setSnackbarSeverity('success');
+        setIsSnackbarOpen(true);
+
+        setTimeout(() => {
+          navigate('/active');
+        }, 3000);
+      } catch (error) {
+        setSnackbarMessage(error.message || 'Failed to create memo. Please try again.');
+        setSnackbarSeverity('error');
+        setIsSnackbarOpen(true);
+      }
     }
   };
 
@@ -38,6 +54,12 @@ function AddMemoPage() {
         confirmButtonColor="save"
         onConfirm={handleConfirmCreate}
         onCancel={() => setDialogOpen(false)}
+      />
+      <CustomizedSnackbar
+        isOpen={isSnackbarOpen}
+        onClose={() => setIsSnackbarOpen(false)}
+        message={snackbarMessage}
+        severity={snackbarSeverity}
       />
     </Container>
   );
