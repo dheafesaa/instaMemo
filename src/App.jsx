@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {
-  Routes, Route, useLocation, useNavigate,
+  Routes, Route, useLocation, useNavigate, Navigate,
 } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { asyncPreloadProcess } from './states/isPreload/action';
@@ -15,12 +15,9 @@ import ArchievedPage from './pages/ArchievedPage';
 import EditMemoPage from './pages/EditMemoPage';
 
 function App() {
-  const { authUser = null, isPreload = false } = useSelector(
-    (states) => states,
-  );
+  const { authUser = null, isPreload = false } = useSelector((states) => states);
 
   const location = useLocation();
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -30,29 +27,29 @@ function App() {
 
   const onLogout = () => {
     dispatch(asyncUnsetAuthUser());
-    navigate('/');
+    navigate('/login');
   };
+
+  const shouldShowNavbar = authUser && !['/login', '/register'].includes(location.pathname);
 
   if (isPreload) {
     return null;
   }
 
-  const isLoginOrRegisterPage = location.pathname === '/login' || location.pathname === '/register';
-
   return (
     <div className="app">
-      <header>
-        {authUser && !isLoginOrRegisterPage && <Navbar onLogout={onLogout} />}
-      </header>
+      <header>{shouldShowNavbar && <Navbar onLogout={onLogout} />}</header>
       <main>
         <Routes>
-          <Route path="/*" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/active" element={<ActivePage />} />
-          <Route path="/archives" element={<ArchievedPage />} />
-          <Route path="/add-memo" element={<AddMemoPage />} />
-          <Route path="/detail-memo/:id" element={<DetailMemoPage />} />
-          <Route path="/edit-memo/:id" element={<EditMemoPage />} />
+          <Route path="/active/add-memo" element={<AddMemoPage />} />
+          <Route path="/active/edit-memo/:id" element={<EditMemoPage />} />
+          <Route path="/active/detail-memo/:id" element={<DetailMemoPage />} />
+          <Route path="/archived" element={<ArchievedPage />} />
+          <Route path="/archived/detail-memo/:id" element={<DetailMemoPage />} />
+          <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </main>
     </div>

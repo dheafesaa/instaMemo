@@ -4,7 +4,7 @@ import { Grid } from '@mui/material';
 import Alert from '../atoms/Alert';
 import MemoItem from '../molecules/MemoItem';
 
-function MemoList({ memos }) {
+function MemoList({ memos, basePath }) {
   const rowColors1 = ['#A5FFFF', '#FFF0A1', '#FFA7FB', '#FF7F96'];
   const rowColors2 = ['#FFA7FB', '#FF7F96', '#A5FFFF', '#FFF0A1'];
   const itemsPerRow = 4;
@@ -16,7 +16,7 @@ function MemoList({ memos }) {
           <Alert
             severity="info"
             title="Information"
-            body="No memos available. Please add a new memo to get started!"
+            body="No memos available."
           />
         </Grid>
       ) : (
@@ -32,7 +32,9 @@ function MemoList({ memos }) {
                 title={memo.title}
                 body={memo.body}
                 createdAt={memo.createdAt}
+                updatedAt={memo.updatedAt}
                 color={color}
+                basePath={basePath}
               />
             </Grid>
           );
@@ -49,8 +51,10 @@ MemoList.propTypes = {
       title: PropTypes.string.isRequired,
       body: PropTypes.string.isRequired,
       createdAt: PropTypes.string.isRequired,
+      updatedAt: PropTypes.string,
     }),
   ).isRequired,
+  basePath: PropTypes.string.isRequired,
 };
 
 export default MemoList;

@@ -9,17 +9,20 @@ import {
 } from '@mui/material';
 
 function ConfirmDialog({
-  open, title, content, onConfirm, onCancel,
+  open,
+  title,
+  content,
+  onConfirm,
+  onCancel,
+  confirmButtonColor,
 }) {
   return (
     <Dialog open={open} onClose={onCancel}>
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>{content}</DialogContent>
       <DialogActions>
-        <Button onClick={onCancel}>
-          Cancel
-        </Button>
-        <Button onClick={onConfirm} color="error" variant="contained">
+        <Button onClick={onCancel}>Cancel</Button>
+        <Button onClick={onConfirm} color={confirmButtonColor} variant="contained">
           Yes
         </Button>
       </DialogActions>
@@ -33,6 +36,7 @@ ConfirmDialog.propTypes = {
   content: PropTypes.string.isRequired,
   onConfirm: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  confirmButtonColor: PropTypes.string.isRequired,
 };
 
 export default ConfirmDialog;

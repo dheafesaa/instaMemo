@@ -1,37 +1,55 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { Box, Container, Typography } from '@mui/material';
-import { FiPlus } from 'react-icons/fi';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Container } from '@mui/material';
+import Loader from '../components/atoms/Loader';
 import SearchBar from '../components/atoms/SearchBar';
-import ActionButton from '../components/atoms/ActionButton';
+import HeaderSection from '../components/organisms/HeaderSection';
 import MemoList from '../components/organisms/MemoList';
 import { asyncReceiveAllActiveMemo } from '../states/allMemo/action';
+import { filterMemos } from '../utils';
 
 function ActivePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const keywordFromURL = searchParams.get('search') || '';
+  const [keyword, setKeyword] = useState(keywordFromURL);
 
+  const authUser = useSelector((state) => state.authUser);
+  const loading = useSelector((state) => state.loadingMemo.loading);
   const activeMemos = useSelector((state) => state.getAllMemo?.activeMemos);
 
   useEffect(() => {
     dispatch(asyncReceiveAllActiveMemo());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (keyword) {
+      setSearchParams({ search: keyword });
+    } else {
+      setSearchParams({});
+    }
+  }, [keyword, setSearchParams]);
+
+  const filteredActiveMemos = filterMemos(activeMemos, keyword);
+
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <Container maxWidth="lg">
-      <Box display="flex" justifyContent="space-between" alignItems="center" mt={4} mb={4}>
-        <Typography variant="h5">Hi, Dhea!</Typography>
-        <ActionButton
-          label="New Memo"
-          onClick={() => navigate('/add-memo')}
-          color="add"
-          variant="contained"
-          icon={FiPlus}
-        />
-      </Box>
-      <SearchBar placeholder="Search by title..." />
-      <MemoList memos={activeMemos} />
+      <HeaderSection
+        title={`Hi, ${authUser?.name || 'User'}!`}
+        onAdd={() => navigate('/active/add-memo')}
+      />
+      <SearchBar
+        placeholder="Search by title..."
+        value={keyword}
+        onChange={(e) => setKeyword(e.target.value)}
+      />
+      <MemoList memos={filteredActiveMemos} basePath="/active" />
     </Container>
   );
 }

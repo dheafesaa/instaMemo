@@ -61,6 +61,9 @@ const baseTheme = createTheme({
     h6: {
       fontSize: '20px',
     },
+    body1: {
+      fontSize: '16px',
+    },
   },
 
   components: {

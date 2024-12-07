@@ -7,15 +7,15 @@ const initialState = {
 
 const getAllMemoReducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case ActionType.RECEIVE_ACTIVEMEMO:
+    case ActionType.RECEIVE_ACTIVE_MEMO:
       return {
         ...state,
-        activeMemos: action.payload.activeMemo,
+        activeMemos: [...action.payload],
       };
-    case ActionType.RECEIVE_ARCHIVEDMEMO:
+    case ActionType.RECEIVE_ARCHIVED_MEMO:
       return {
         ...state,
-        archivedMemos: action.payload.archivedMemo,
+        archivedMemos: [...action.payload],
       };
     default:
       return state;

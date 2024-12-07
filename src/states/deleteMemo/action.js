@@ -11,12 +11,11 @@ function setDeleteMemo(id) {
   };
 }
 
-function asyncSetDeleteMemo(id, navigate) {
+function asyncSetDeleteMemo(id) {
   return async (dispatch) => {
     try {
       const deleteMemoData = await api.deleteMemo(id);
       dispatch(setDeleteMemo(deleteMemoData));
-      navigate('/active');
     } catch (error) {
       alert(error.message);
     }

@@ -13,12 +13,11 @@ function createMemo(data) {
   };
 }
 
-function asyncCreateMemo({ title, body }, navigate) {
+function asyncCreateMemo({ title, body }) {
   return async (dispatch) => {
     try {
       const createMemoData = await api.createMemo({ title, body });
       dispatch(createMemo(createMemoData));
-      navigate('/active');
     } catch (error) {
       alert(error.message);
     }

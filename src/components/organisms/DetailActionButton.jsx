@@ -25,7 +25,7 @@ function DetailActionButton({
     !isArchived && {
       id: 'edit',
       label: 'Edit',
-      onClick: () => navigate(`/edit-memo/${id}`),
+      onClick: () => navigate(`/active/edit-memo/${id}`),
       color: 'edit',
       icon: RiEditBoxLine,
     },
@@ -41,7 +41,7 @@ function DetailActionButton({
   return (
     <HeaderSection
       title="Memo Details"
-      onBack={() => navigate(isArchived ? '/archives' : '/active')}
+      onBack={() => navigate(isArchived ? '/archived' : '/active')}
       actions={actions}
     />
   );

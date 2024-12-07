@@ -19,24 +19,22 @@ function unarchiveMemoAction(data) {
   };
 }
 
-function asyncArchiveMemo(id, navigate) {
+function asyncArchiveMemo(id) {
   return async (dispatch) => {
     try {
       const archivedMemo = await api.archiveMemo(id);
       dispatch(archiveMemoAction(archivedMemo));
-      navigate('/active');
     } catch (error) {
       alert(error.message);
     }
   };
 }
 
-function asyncUnarchiveMemo(id, navigate) {
+function asyncUnarchiveMemo(id) {
   return async (dispatch) => {
     try {
       const unarchivedMemo = await api.unarchiveMemo(id);
       dispatch(unarchiveMemoAction(unarchivedMemo));
-      navigate('/archives');
     } catch (error) {
       alert(error.message);
     }

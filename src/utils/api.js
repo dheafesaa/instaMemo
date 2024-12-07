@@ -9,6 +9,10 @@ const api = (() => {
     localStorage.setItem('accessToken', accessToken);
   }
 
+  function removeAccessToken() {
+    localStorage.removeItem('accessToken');
+  }
+
   async function register({ name, email, password }) {
     if (password.length < 6) {
       throw new Error('Password must be at least 6 characters long');
@@ -228,6 +232,7 @@ const api = (() => {
   return {
     putAccessToken,
     getAccessToken,
+    removeAccessToken,
     register,
     login,
     getOwnProfile,
