@@ -8,6 +8,7 @@ import { asyncArchiveMemo, asyncUnarchiveMemo } from '../states/statusMemo/actio
 import DetailMemoItem from '../components/organisms/DetailMemoItem';
 import CustomizedSnackbar from '../components/atoms/Snackbar';
 import ConfirmDialog from '../components/atoms/ConfirmDialog';
+import Loader from '../components/atoms/Loader';
 
 function DetailMemoPage() {
   const { id } = useParams();
@@ -18,6 +19,7 @@ function DetailMemoPage() {
   const [snackbarSeverity, setSnackbarSeverity] = useState(null);
   const [isDialogOpen, setDialogOpen] = useState(false);
 
+  const loading = useSelector((state) => state.loadingMemo.loading);
   const detailMemo = useSelector((state) => state.detailMemo?.detailMemo);
 
   useEffect(() => {
@@ -71,8 +73,8 @@ function DetailMemoPage() {
     }
   };
 
-  if (!detailMemo) {
-    return <div>Loading...</div>;
+  if (loading || !detailMemo) {
+    return <Loader />;
   }
 
   return (

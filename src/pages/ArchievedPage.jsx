@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
+import Loader from '../components/atoms/Loader';
 import SearchBar from '../components/atoms/SearchBar';
 import HeaderSection from '../components/organisms/HeaderSection';
 import MemoList from '../components/organisms/MemoList';
@@ -15,6 +16,7 @@ function ArchievedPage() {
   const [keyword, setKeyword] = useState(keywordFromURL);
 
   const authUser = useSelector((state) => state.authUser);
+  const loading = useSelector((state) => state.loadingMemo.loading);
   const archivedMemos = useSelector((state) => state.getAllMemo?.archivedMemos);
 
   useEffect(() => {
@@ -30,6 +32,10 @@ function ArchievedPage() {
   }, [keyword, setSearchParams]);
 
   const filteredArchivedMemos = filterMemos(archivedMemos, keyword);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <Container maxWidth="lg">
